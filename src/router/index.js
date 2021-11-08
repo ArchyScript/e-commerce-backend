@@ -1,6 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
+Vue.use(VueRouter)
+
+// Routes
+// Admin Dasboard
+const Admin = () => import("../components/Admin/Main.vue")
+// // Home Routes
+const Home = () => import("@/components/Home/Main.vue")
+// // About Routes
+const About = () => import("@/components/About/Main.vue")
+// // Resources Routes
+const Categories = () => import("@/components/Categories/Main.vue")
 
 Vue.use(VueRouter)
 
@@ -8,17 +19,31 @@ const routes = [
   {
     path: '/',
     name: 'Home',
+    redirect: '/home',
+    component: Home
+  },
+  {
+    path: '/home',
+    name: 'Home',
     component: Home
   },
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    component: About
+  },
+  {
+    path: '/categories',
+    name: 'Categories',
+    component: Categories,
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
+  },
 ]
+
 
 const router = new VueRouter({
   mode: 'history',
