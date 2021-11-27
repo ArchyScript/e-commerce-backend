@@ -22,7 +22,7 @@
               <v-card-text
                 class="white--text text-h5 ml-8"
                 style="width: 60%; line-height: 3rem"
-              >`
+              >
                 ...
                 <span color="green-- text"> {{ randomText }} </span> providing
                 all products for all architects

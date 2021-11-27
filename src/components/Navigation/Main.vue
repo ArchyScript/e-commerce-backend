@@ -145,7 +145,7 @@
           :key="eachSidebarListAndRoute.title"
           link
           v-model="selectedItem"
-          color="primary"
+          color="success"
           @click="changeRoutes(eachSidebarListAndRoute.route)"
         >
           <v-list-item-icon>
@@ -217,6 +217,7 @@ export default {
     changeRoutes(route) {
       this.$router.push(route);
       console.log(route);
+      console.log(this.$route.params) 
     },
   },
 };

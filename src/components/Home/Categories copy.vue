@@ -3,47 +3,112 @@
     <v-container>
       <v-row justify="center">
         <v-col cols="12" class="text-center">
-          <v-subheader class="text-h4 justify-center"> Portfolio </v-subheader>
+          <v-subheader class="text-h4 justify-center"> Categories </v-subheader>
         </v-col>
 
         <v-col cols="12">
           <div class="text-center">
-            <v-chip
-              @click="activePortfolio = 'desktop_app'"
-              :color="activePortfolio == 'desktop_app' ? 'success' : ''"
-              class="mx-2 px-3 mb-3"
-              outlined
-            >
-              Desktop App
-            </v-chip>
-            <v-chip
-              @click="activePortfolio = 'clone'"
-              :color="activePortfolio == 'clone' ? 'success' : ''"
-              class="mx-2 px-3 mb-3"
-              outlined
-            >
-              Clone Sites
-            </v-chip>
-            <v-chip
-              @click="activePortfolio = 'simple_app'"
-              :color="activePortfolio == 'simple_app' ? 'success' : ''"
+            <v-btn
+              @click="activeCategory = 'simple_app'"
+              :color="activeCategory == 'simple_app' ? 'success' : ''"
               class="mx-2 px-3 mb-3"
               outlined
             >
               Simple App
-            </v-chip>
+            </v-btn>
+            <!--
+            <v-btn
+              @click="activeCategory = 'instrument'"
+              :color="activeCategory == 'instrument' ? 'success' : ''"
+              class="mx-2 px-3 mb-3"
+              outlined
+            >
+              Instruments
+            </v-btn>
+            <v-btn
+              @click="activeCategory = 'clone'"
+              :color="activeCategory == 'clone' ? 'success' : ''"
+              class="mx-2 px-3 mb-3"
+              outlined
+            >
+              Clone Sites
+            </v-btn> -->
           </div>
         </v-col>
 
+        <v-dialog v-model="dialog" persistent max-width="80%">
+          <!-- <template v-slot:activator="{ on, attrs }">
+                  <v-btn color="primary" dark v-bind="attrs" v-on="on">
+                    Open Dialog
+                  </v-btn>
+                </template> -->
+          <v-card>
+            <v-row>
+              <v-col>
+                <v-img
+                  src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                  class="white--text align-end"
+                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  height="400px"
+                >
+                  <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <v-progress-circular
+                        indeterminate
+                        color="grey lighten-5"
+                      ></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
+              </v-col>
+
+              <v-col>
+                <v-img
+                  src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                  class="white--text align-end"
+                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  height="400px"
+                >
+                  <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <v-progress-circular
+                        indeterminate
+                        color="grey lighten-5"
+                      ></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
+              </v-col>
+            </v-row>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="dialog = false">
+                Disagree
+              </v-btn>
+              <v-btn color="green darken-1" text @click="dialog = false">
+                Agree
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
         <v-col col="12">
-          <v-row justify="center" v-if="activePortfolio == 'simple_app'">
+          <v-row justify="center" v-if="activeCategory == 'simple_app'">
             <v-col
               v-for="simple_app in simple_apps"
               :key="simple_app.title"
               cols="12"
               sm="6"
               md="4"
-              lg="3"
             >
               <!-- <template v-if="simple_app.available"> -->
               <v-card>
@@ -88,43 +153,61 @@
 
                 <v-expand-transition>
                   <div v-show="simple_app.title === projectTitle">
-                    <v-divider></v-divider>
-
                     <v-card-text>
                       {{ simple_app.description }}
                     </v-card-text>
+
+                    <v-btn
+                      color="dark"
+                      outlined
+                      text
+                      @click="gotoLinkAddress(simple_app.link.github)"
+                    >
+                      View Details
+                      <v-icon right dark> mdi-github </v-icon>
+                    </v-btn>
                   </div>
                 </v-expand-transition>
               </v-card>
 
               <v-divider></v-divider>
 
-              <v-card-actions>
-                <v-btn
-                  color="teal darken-3"
-                  outlined
-                  text
-                  @click="gotoLinkAddress(simple_app.link.deployed)"
-                >
-                  Preview
-                  <v-icon right dark> mdi-open-in-new </v-icon>
+              <!-- <v-card-actions>
+                <v-btn outlined> test </v-btn>
+
+                <v-spacer></v-spacer>
+
+                <v-btn icon title="click me">
+                  <v-icon>mdi-heart</v-icon>
                 </v-btn>
 
-                <v-btn
-                  color="dark"
-                  outlined
-                  text
-                  @click="gotoLinkAddress(simple_app.link.github)"
-                >
-                  Github
-                  <v-icon right dark> mdi-github </v-icon>
+                <v-btn icon title="click me">
+                  <v-icon>mdi-bookmark</v-icon>
+                </v-btn>
+
+                <v-btn icon title="click me">
+                  <v-icon>mdi-share-variant</v-icon>
+                </v-btn>
+              </v-card-actions> -->
+
+              <v-card-actions>
+                <v-btn color="teal darken-3" outlined text>
+                  Preview
+                  <v-icon right dark> mdi-cart-variant </v-icon>
+                </v-btn>
+
+                <v-spacer></v-spacer>
+
+                <v-btn color="dark" outlined text>
+                  Add Cart
+                  <v-icon right dark> mdi-cart-variant </v-icon>
                 </v-btn>
               </v-card-actions>
               <!-- </template> -->
             </v-col>
           </v-row>
 
-          <v-row justify="center" v-if="activePortfolio == 'clone'">
+          <v-row justify="center" v-if="activeCategory == 'clone'">
             <v-col
               v-for="clone in clones"
               :key="clone.title"
@@ -212,19 +295,19 @@
             </v-col>
           </v-row>
 
-          <v-row justify="center" v-if="activePortfolio == 'desktop_app'">
+          <v-row justify="center" v-if="activeCategory == 'instrument'">
             <v-col
-              v-for="desktop_app in desktop_apps"
-              :key="desktop_app.title"
+              v-for="instrument in instruments"
+              :key="instrument.title"
               cols="12"
               sm="6"
               md="4"
               lg="3"
             >
-              <!-- <template v-if="desktop_app.available"> -->
+              <!-- <template v-if="instrument.available"> -->
               <v-card>
                 <v-img
-                  :src="desktop_app.src"
+                  :src="instrument.src"
                   class="white--text align-end"
                   gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                   height="200px"
@@ -242,7 +325,7 @@
                     </v-row>
                   </template>
                   <v-card-title class="text-h5 font-weight-bold">
-                    {{ desktop_app.title }}
+                    {{ instrument.title }}
                   </v-card-title>
                 </v-img>
 
@@ -251,10 +334,10 @@
 
                   <v-spacer></v-spacer>
 
-                  <v-btn icon @click="showDescription(desktop_app.title)">
+                  <v-btn icon @click="showDescription(instrument.title)">
                     <v-icon>
                       {{
-                        desktop_app.title === projectTitle
+                        instrument.title === projectTitle
                           ? "mdi-chevron-up"
                           : "mdi-chevron-down"
                       }}
@@ -263,11 +346,11 @@
                 </v-card-actions>
 
                 <v-expand-transition>
-                  <div v-show="desktop_app.title === projectTitle">
+                  <div v-show="instrument.title === projectTitle">
                     <v-divider></v-divider>
 
                     <v-card-text>
-                      {{ desktop_app.description }}
+                      {{ instrument.description }}
                     </v-card-text>
                   </div>
                 </v-expand-transition>
@@ -280,17 +363,17 @@
                   color="teal darken-3"
                   outlined
                   text
-                  @click="gotoLinkAddress(desktop_app.link.deployed)"
+                  @click="gotoLinkAddress(instrument.link.deployed)"
                 >
                   Preview
-                  <v-icon right dark> mdi-open-in-new </v-icon>
+                  <v-icon right dark> mdi-cart-variant </v-icon>
                 </v-btn>
 
                 <v-btn
                   color="dark"
                   outlined
                   text
-                  @click="gotoLinkAddress(desktop_app.link.github)"
+                  @click="gotoLinkAddress(instrument.link.github)"
                 >
                   Github
                   <v-icon right dark> mdi-github </v-icon>
@@ -310,7 +393,8 @@ export default {
   name: "Portfolio",
   data: () => ({
     projectTitle: "",
-    activePortfolio: "desktop_app",
+    activeCategory: "simple_app",
+    dialog: true,
     simple_apps: [
       {
         title: "Typing Game",
@@ -322,7 +406,7 @@ export default {
           github: "https://github.com/ArchyScript/typing_game.git",
           citonhub: "https://www.citonhub.com/run-panel/692471289",
         },
-        src: require("@/img/portfolio/typing_game.png"),
+        src: "",
         available: true,
       },
       {
@@ -335,7 +419,7 @@ export default {
           github: "https://github.com/ArchyScript/simple_store.git",
           citonhub: "",
         },
-        src: require("@/img/portfolio/store.png"),
+        src: "",
         available: true,
       },
       {
@@ -348,7 +432,7 @@ export default {
           github: "https://github.com/ArchyScript/tic-tac-toe-game.git",
           citonhub: "https://www.citonhub.com/run-panel/325777815",
         },
-        src: require("@/img/portfolio/tic_tac_toe.png"),
+        src: "",
         available: true,
       },
       {
@@ -362,7 +446,7 @@ export default {
             "https://github.com/ArchyScript/simple_responsive_dashboard.git",
           citonhub: "",
         },
-        src: require("@/img/portfolio/simple_dashboard.png"),
+        src: "",
         available: true,
       },
       {
@@ -375,7 +459,7 @@ export default {
           github: "https://github.com/ArchyScript/simple_calculator.git",
           citonhub: "",
         },
-        src: require("@/img/portfolio/simple_calculator.png"),
+        src: "",
         available: true,
       },
       {
@@ -388,7 +472,7 @@ export default {
           github: "https://github.com/ArchyScript/virtual_keyboard.git",
           citonhub: "",
         },
-        src: require("@/img/portfolio/virtual_keyboard.png"),
+        src: "",
         available: true,
       },
       {
@@ -401,78 +485,9 @@ export default {
           github: "https://github.com/ArchyScript/random_quote_generator.git",
           citonhub: "",
         },
-        src: require("@/img/portfolio/random_quote.png"),
+        src: "",
         available: true,
       },
-      {
-        title: "Promise Card",
-        description: `A simple promise card design which allows user change background colour`,
-        // description: `["item 1", "item 2", "item 3"]`,
-        techs: [{ title: "HTML", icon: "mdi-home", ratio: "" }],
-        link: {
-          deployed: "https://archyscript-promise-card.netlify.app/",
-          github: "https://github.com/ArchyScript/promise_card.git",
-          citonhub: "",
-        },
-        src: require("@/img/portfolio/promise_card.png"),
-        available: true,
-      },
-      {
-        title: "Matrix Calculator",
-        description: `An app that is capable of solving basic 3x3 matrix problems... Ranging from the determinat, transpose, adjoint to the inverse of that matrix.`,
-        // description: `["item 1", "item 2", "item 3"]`,
-        techs: [{ title: "HTML", icon: "mdi-home", ratio: "" }],
-        link: {
-          deployed: "https://archyscript-matrix-calculator.netlify.app/",
-          github: "https://github.com/ArchyScript/matrrix_calculator.git",
-          citonhub: "",
-        },
-        src: require("@/img/portfolio/matrix_calculator.png"),
-        available: true,
-      },
-      {
-        title: "Lenght Converter",
-        description: `An app that can perform some basic unnit conversion... Also allows user select a unit as reference and base scale for other units...v User can also switch convertion scale`,
-        // description: `["item 1", "item 2", "item 3"]`,
-        techs: [{ title: "HTML", icon: "mdi-home", ratio: "" }],
-        link: {
-          deployed: "https://archyscript-lenght-converter.netlify.app/",
-          github: "https://github.com/ArchyScript/lenght_converter.git",
-          citonhub: "https://www.citonhub.com/run-panel/012931123",
-        },
-        src: require("@/img/portfolio/lenght_converter.png"),
-        available: true,
-      },
-      // {
-      //   title: "Ludo Game",
-      //   description: ``,
-      // description: `["item 1", "item 2", "item 3"]`,
-      //     techs: [
-      // {title: "HTML", icon: "mdi-home", ratio: ""}
-      //     ],
-      //      link: {
-      //     deployed: "",
-      //     github: "",
-      //     citonhub: "",
-      //   },
-      //   src: require("@/img/portfolio/tic_tac_toe.png"),
-      //   available: true,
-      // },
-      // {
-      //   title: "Text Editor",
-      //   description: ``,      //
-      // description: `["item 1", "item 2", "item 3"]`,
-      // techs: [
-      //   {title: "HTML", icon: "mdi-home", ratio: ""}
-      // ],
-      //  link: {
-      //     deployed: "",
-      //     github: "https://github.com/ArchyScript/text_editor.git",
-      //     citonhub: "",
-      //   },
-      //   src: require("@/img/portfolio/tic_tac_toe.png"),
-      //   available: true,
-      // },
     ],
 
     clones: [
@@ -486,7 +501,7 @@ export default {
           github: "https://github.com/ArchyScript/airbnb_clone.git",
           citonhub: "",
         },
-        src: require("@/img/portfolio/airbnb.png"),
+        src: "",
         available: true,
       },
       {
@@ -499,12 +514,12 @@ export default {
           github: "https://github.com/ArchyScript/gmail_clone.git",
           citonhub: "",
         },
-        src: require("@/img/portfolio/gmail.png"),
+        src: "",
         available: true,
       },
     ],
 
-    desktop_apps: [
+    instruments: [
       {
         title: "My Portfolio",
         description: `My portfolio website which includes programming languages I uses and their ratings accordingly... my contact info etc. (same as this page)`,
@@ -515,7 +530,7 @@ export default {
           github: "https://github.com/ArchyScript",
           citonhub: "",
         },
-        src: require("@/assets/profile_picture.png"),
+        src: "",
         available: true,
       },
     ],
@@ -526,7 +541,11 @@ export default {
       window.open(link, "_blank");
       // window.location.href = link;
     },
-    showDescription(title) {
+    showDescription() {
+      this.dialog = true;
+    },
+    addItemToCart(title) {
+      this.dialog = true;
       if (this.projectTitle == title) return (this.projectTitle = "");
       if (this.projectTitle != title) return (this.projectTitle = title);
     },
@@ -535,9 +554,4 @@ export default {
 </script>
 
 <style lang="css" scoped>
-/** /
-.disable_btn {
-
-} 
-/**/
 </style>

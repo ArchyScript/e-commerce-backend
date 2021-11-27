@@ -9,7 +9,7 @@
       <!-- <Footer /> -->
     </v-main>
   </v-app>
-</template>
+</template> 
 
 <script lang="js">
 // import Vue from "vue";
