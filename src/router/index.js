@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 // Routes
 // Admin Dasboard
-const Admin = () => import("../components/Admin/Main.vue")
+const NewProduct = () => import("../components/NewProduct/Main.vue")
 // // Home Routes
 const Home = () => import("@/components/Home/Main.vue")
 // // About Routes
@@ -38,9 +38,9 @@ const routes = [
     component: Categories,
   },
   {
-    path: '/admin',
-    name: 'Admin',
-    component: Admin
+    path: '/new-product/:product_id',
+    name: 'NewProduct',
+    component: NewProduct
   },
 ]
 

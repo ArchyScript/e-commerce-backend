@@ -7,7 +7,7 @@
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
         <v-toolbar-title>
-          <span class=""> ArchyStores</span>
+          <span class=""> ArchyStores </span>
         </v-toolbar-title>
       </v-toolbar>
       <v-spacer></v-spacer>
@@ -184,7 +184,7 @@ export default {
         icon: "mdi-view-dashboard",
         route: "/home",
         // subItems: [
-        //   {title: "test Sub", icon: "mdi-home", route: "/home"}
+        //   {tit  le: "test Sub", icon: "mdi-home", route: "/home"}
         // ]
       },
       {
@@ -195,17 +195,17 @@ export default {
       {
         title: "Categories",
         icon: "mdi-help-box",
-        route: "/catagories",
+        route: "/categories",
       },
+      // {
+      //   title: "Store",
+      //   icon: "mdi-help-box",
+      //   route: "/store",
+      // },
       {
-        title: "Store",
-        icon: "mdi-help-box",
-        route: "/store",
-      },
-      {
-        title: "Admin",
+        title: "New Product",
         icon: "mdi-view-dashboard",
-        route: "/admin",
+        route: "/new-product/",
       },
     ],
     right: null,
@@ -219,6 +219,10 @@ export default {
       console.log(route);
       console.log(this.$route.params) 
     },
+  },
+
+  created() {
+    console.log(this.$router.params.product_id)
   },
 };
 </script>
